@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import validation from './Loginvalidation'
 import axios from 'axios'
 
@@ -9,7 +9,7 @@ function Login() {
         email:'',
         password:''
     })
-    const Navigate = useNavigate();
+    const navigate = useNavigate()
 
     const[errors,setErrors] = useState({})
     const handleInput=(event) => {
@@ -18,17 +18,18 @@ function Login() {
     const handleSubmit=(event)=>{
         event.preventDefault();
         setErrors(validation(values));
-        if(errors.email === "" && errors.password === ""){
-            axios.post('http://localhost:8081/login', values)
-            .then((res) => {
-               if(res.data === "success"){
-                Navigate('/home');
-               }else{
-                alert("No record existed")
-               }
+        if(errors.email === ""){
+            axios.post('http://localhost:8082/login',values)
+            .then(res => {
+                console.log(res); // Log the server response
+                if(res.data === "success"){
+                    navigate('/Home');
+                } else {
+                    alert("No records found!")
+                }
             })
-            .catch(err => console.log(err));
-       }
+            .catch(err => console.log(err))
+        }
     }
   return (
     <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>

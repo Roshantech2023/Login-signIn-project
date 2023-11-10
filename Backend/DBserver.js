@@ -1,25 +1,26 @@
-import express from 'express'
-import mysql from 'mysql'
-import cors from 'cors'
+const express = require("express");
+const mysql = require('mysql');
+const cors = require('cors');
 
 const app = express();
 app.use(cors());
+app.use(express.json())
 
 const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"",
-    database: 'signup'
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "userssign"
 })
 
-app.get('/', (req, res) => {
+app.get('/',(req, res) => {
     const sql = "SELECT * FROM listofuser";
-    db.query(sql, (err, result)=> {
-        if(err) return res.json({Message: "Error inside server"});
+    db.query(sql, (err, result)=>{
+        if(err) return res.json({message:"Error inside server"});
         return res.json(result);
     })
 })
 
-app.listen(8081, ()=>{
+app.listen(8080,()=>{
     console.log("listening")
 })
