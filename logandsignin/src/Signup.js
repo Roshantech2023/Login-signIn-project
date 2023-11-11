@@ -22,7 +22,7 @@ function Signup() {
         event.preventDefault();
         setErrors(validation(values));
         if(errors.name === "" && errors.email === ""){
-            axios.post('http://localhost:8082/userssign',values)
+            axios.post('http://localhost:8085/userssign',values)
             .then(res => {
                 console.log(res); // Log the server response
                 navigate('/');
