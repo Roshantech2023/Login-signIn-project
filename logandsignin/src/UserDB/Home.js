@@ -1,8 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useNavigate } from 'react-router-dom';
 
 
+function Subhome() {
+  const navigater = useNavigate()
+  const handleSubmit = () =>{
+      const result = window.confirm("Are you sure want to logout....?")
+      if(result){
+        navigater('/')
+      }
+      else{
+        alert("logout canceld....")
+      }
+  }
+  return (
+      <div className="d-flex justify-content-end">
+        <button className='btn btn-sm btn-danger mb-2 justify-content-end ml-2' onClick={handleSubmit}>Logout</button>
+      </div>
+  )
+}
 
 function Home() {
   const[data, setData] = useState([])
@@ -14,6 +32,10 @@ function Home() {
 
   
   return (
+    <div>
+    <div className='w-100 h-75 d-flex bg-white mt-3 justify-content-end ml-2'>
+        <Subhome/>
+    </div>
     <div className='d-flex vh-100 bg-primary justify-content-center align-items-center'>
       <div className='w-80 bg-white rounded p-3'>
         <table className="table table-bordered table-striped">
@@ -57,6 +79,7 @@ function Home() {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   )
 }

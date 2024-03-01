@@ -19,13 +19,13 @@ function Login() {
         event.preventDefault();
         setErrors(validation(values));
         if(errors.email === ""){
-            axios.post('http://localhost:8085/login',values)
+            axios.post('http://localhost:8000/login',values)
             .then(res => {
                 console.log(res); // Log the server response
                 if(res.data === "success"){
                     navigate('/Home');
                 } else {
-                    alert("No records found!")
+                    window.alert("No records found!")
                 }
             })
             .catch(err => console.log(err))
