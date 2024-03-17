@@ -23,7 +23,7 @@ function Login() {
             .then(res => {
                 console.log(res); // Log the server response
                 if(res.data === "success"){
-                    navigate('/Home');
+                    navigate('/Dashboard');
                 } else {
                     window.alert("No records found!")
                 }
