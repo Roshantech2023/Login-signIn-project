@@ -24,12 +24,20 @@ function Signup() {
         if(errors.name === "" && errors.email === ""){
             axios.post('http://localhost:8000/userssign',values)
             .then(res => {
+                alert("registered successfully...")
                 navigate('/')
             })
             .catch(err => console.log(err))
         }
     }    
   return (
+    <div>
+        <img
+          src={"https://png.pngtree.com/png-vector/20190316/ourlarge/pngtree-employee-icon-design-template-vector-isolated-png-image_856368.jpg"} 
+          height="60"
+          className="d-inline-block align-top"
+          alt="Logo"
+        />
     <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>
         <div className='bg-white p-3 rounded w-25'>
             <h2>Sign-Up</h2>
@@ -57,6 +65,7 @@ function Signup() {
                 <Link to="/" className='btn btn-default border w-100 bg-light rounded-0'>Login</Link>
             </form>
         </div>
+    </div>
     </div>
   )
 }

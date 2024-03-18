@@ -14,7 +14,7 @@ const db = mysql.createConnection({
 })
 
 app.get('/',(req, res) => {
-    const sql = "SELECT * FROM listofuser";
+    const sql = "SELECT * FROM employelist";
     db.query(sql, (err, result)=>{
         if(err) return res.json({message:"Error inside server"});
         return res.json(result);
@@ -34,23 +34,49 @@ app.delete('/user/:ID',(req,res) => {
 })
 */
 
-app.post('/users',(req,res)=>{
-    const sql="INSERT INTO listofuser (`gender`,`age`,`dob`,`place`,`passion`,`contact`,`altercontact`,`language`) VALUES (?)";
+app.post('/employes',(req,res)=>{
+    const sql="INSERT INTO employelist (`NAME`,`EMAIL`,`MOBILE`,`DESIGNATION`,`GENDER`,`COURSE`) VALUES (?)";
     const values = [
-        req.body.gender,
-        req.body.age,
-        req.body.dob,
-        req.body.place,
-        req.body.passion,
-        req.body.contact,
-        req.body.altercontact,
-        req.body.language
+        req.body.NAME,
+        req.body.EMAIL,
+        req.body.MOBILE,
+        req.body.DESIGNATION,
+        req.body.GENDER,
+        req.body.COURSE,
     ]
     db.query(sql,[values],(err,result) => {
         if(err) return res.json(err);
         return res.json(result);
     })
 })
+
+app.put('/employees/:UNIC_ID', (req, res) => {
+    const employeeId = req.params.ID;
+    const { NAME, EMAIL, MOBILE, DESIGNATION, GENDER, COURSE } = req.body;
+    const sql = "UPDATE employelist SET NAME=?, EMAIL=?, MOBILE=?, DESIGNATION=?, GENDER=?, COURSE=? WHERE UNIC_ID=?";
+    const values = [NAME, EMAIL, MOBILE, DESIGNATION, GENDER, COURSE, employeeId];
+
+    db.query(sql, values, (err, result) => {
+        if (err) {
+            console.log("Error updating employee: ", err);
+            return res.status(500).json({ error: "Error updating employee" });
+        }
+        return res.json({ message: "Employee updated successfully" });
+    });
+});
+
+app.get('/count', (req, res) => {
+    const sql = "SELECT COUNT(*) AS totalCount FROM employelist";
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error("Error counting records: ", err);
+            return res.status(500).json({ error: "Error counting records" });
+        }
+        const totalCount = result[0].totalCount;
+        return res.json({ totalCount });
+    });
+});
+
 app.listen(8080,()=>{
     console.log("listening")
 })

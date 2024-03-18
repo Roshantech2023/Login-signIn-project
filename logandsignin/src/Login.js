@@ -32,6 +32,13 @@ function Login() {
         }
     }
   return (
+    <div>
+        <img
+          src={"https://png.pngtree.com/png-vector/20190316/ourlarge/pngtree-employee-icon-design-template-vector-isolated-png-image_856368.jpg"} 
+          height="60"
+          className="d-inline-block align-top"
+          alt="Logo"
+        />
     <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>
         <div className='bg-white p-3 rounded w-25'>
         <h2>Sign-In</h2>
@@ -53,6 +60,7 @@ function Login() {
                 <Link to="/signup" className='btn btn-default border w-100 bg-light rounded-0'>create account</Link>
             </form>
         </div>
+    </div>
     </div>
   )
 }

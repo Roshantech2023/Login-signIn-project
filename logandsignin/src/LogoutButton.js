@@ -4,11 +4,13 @@ const LogoutButton = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Clear user authentication state (e.g., remove token from local storage)
-    localStorage.removeItem('userToken');
-
-    // Redirect to the home page
-    navigate('/home');
+    const result = window.confirm("Are you sure want to logout....?")
+    if(result){
+      navigate('/')
+    }
+    else{
+      alert("logout canceld....")
+    }
   };
 
   return (
